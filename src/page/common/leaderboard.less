@@ -1,0 +1,51 @@
+.leaderboard {
+    ul {
+        margin: 0.12rem 0.12rem 0.36rem;
+        li {
+            display: flex;
+            height: 0.6rem;
+            line-height: 0.6rem;
+            margin-top: 0.32rem;
+        }
+        .leaderboard-num {
+            font-size: 0.36rem;
+            font-weight: bold;
+            color: #050505;
+        }
+        .leaderboard-img {
+            position: relative;
+            margin-left: 0.1rem;
+            .leaderborder-avatar {
+                width: 0.6rem;
+                height: 0.6rem;
+                border-radius: 0.3rem;
+            }
+            .avatar1 {
+                border: 1px solid #ffe764;
+            }
+            .avatar2 {
+                border: 1px solid #dedede;
+            }
+            .avatar3 {
+                border: 1px solid #ffad64;
+            }
+            .leaderborder-crown {
+                position: absolute;
+                top: -0.1rem;
+                left: 0.24rem;
+            }
+        }
+        .leaderboard-name {
+            color: #999;
+            width: 59vw;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            margin-left: 0.2rem;
+        }
+        .leaderboard-price {
+            font-weight: bold;
+            color: #333333;
+        }
+    }
+}
