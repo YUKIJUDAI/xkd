@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import { Carousel } from "antd-mobile";
 
+import Footer from "../layout/footer";
+
 import ScrollBack from "../common/scrollBack";
 import Leaderboard from "../common/leaderboard";
 
@@ -205,6 +207,8 @@ export default class Home extends Component {
                 </div>
                 {/* ScrollBack */}
                 <ScrollBack></ScrollBack>
+                {/* footer */}
+                <Footer></Footer>
             </div>
         );
     }

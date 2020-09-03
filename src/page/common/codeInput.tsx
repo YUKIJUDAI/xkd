@@ -9,7 +9,7 @@ import "./codeInput.less";
 
 interface State {
     smscode: string; // 短信验证码
-    captha: string; // 图片验证码
+    captcha: string; // 图片验证码
     isSending: boolean; // 是否在获取验证码中
     sendNumber: number; // 倒计时数字
     show: boolean; // 是否显示验证码弹窗
@@ -19,6 +19,7 @@ interface State {
 interface Props {
     changeCode: Function; // 修改验证码
     phone: string; // 手机号
+    type: "reg" | "login" | "forget";
 }
 
 export default class codeInput extends Component<Props, State, {}> {
@@ -27,7 +28,7 @@ export default class codeInput extends Component<Props, State, {}> {
 
         this.state = {
             smscode: "",
-            captha: "",
+            captcha: "",
             isSending: false,
             sendNumber: 60,
             show: false,
@@ -41,11 +42,11 @@ export default class codeInput extends Component<Props, State, {}> {
 
     // 修改图片验证码输入内容
     changeCaptha = (e: ChangeEvent<HTMLInputElement>) => {
-        this.setState({ captha: e.target.value });
+        this.setState({ captcha: e.target.value });
         this.props.changeCode(e.target.value);
     };
 
-    // 修改短信验S证码输入内容
+    // 修改短信验证码输入内容
     changeSmscode = (e: ChangeEvent<HTMLInputElement>) => {
         this.setState({ smscode: e.target.value });
         this.props.changeCode(e.target.value);
@@ -56,9 +57,10 @@ export default class codeInput extends Component<Props, State, {}> {
 
     // 获取短信验证码
     getCode = async () => {
-        const res: any = await http.post("Other/sendsms", { phone: this.props.phone, captha: this.state.captha, type: "reg" });
+        const res: any = await http.post("Other/sendsms", { phone: this.props.phone, captcha: this.state.captcha, type: this.props.type });
         if (res.code === 200) {
-            this.setState({ isSending: true });
+            this.setState({ isSending: true, show: false });
+            Toast.success(res.msg);
             this.countdownTimer = timer(0, 1000).subscribe((val: number) => {
                 const _val = 60 - val;
                 if (_val === 0) {
@@ -96,7 +98,7 @@ export default class codeInput extends Component<Props, State, {}> {
                         <img src={this.state.codeImg} alt="" />
                     </div>
                     <div className="code-footer">
-                        <input type="text" onChange={(event) => this.changeCaptha(event)} value={this.state.captha} className="code-input" placeholder="请输入图片验证码" />
+                        <input type="text" onChange={(event) => this.changeCaptha(event)} value={this.state.captcha} className="code-input" placeholder="请输入图片验证码" />
                         <img src={require("../../static/img/shuaxin.png")} onClick={this.getCaptcha} alt="" />
                         <div className="xkd-btn-primary" onClick={this.getCode}>
                             确认

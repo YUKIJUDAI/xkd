@@ -57,7 +57,7 @@ export default class login extends Component<any, State, {}> {
                         <span>密码</span>
                         <input type="password" value={this.state.loginInfo.password} onChange={(event) => this.change("password", event)} className="xkd-input" placeholder="请输入密码" />
                     </div>
-                    <CodeInput changeCode={(smscode: string) => this.change("smscode", smscode)} phone={this.state.loginInfo.phone}></CodeInput>
+                    <CodeInput type="reg" changeCode={(smscode: string) => this.change("smscode", smscode)} phone={this.state.loginInfo.phone}></CodeInput>
                     <div className="xkd-input-label">
                         <span>邀请码</span>
                         <input type="text" value={this.state.loginInfo.invitecode} onChange={(event) => this.change("invitecode", event)} className="xkd-input" placeholder="请输入邀请码（选填）" />

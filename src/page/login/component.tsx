@@ -51,7 +51,7 @@ export const LoginByCode: React.SFC<Props> = (props: Props) => {
                 <span>+86</span>
                 <input type="text" value={loginInfo.phone} onChange={(event) => change("phone", event)} className="xkd-input" placeholder="请输入手机号" />
             </div>
-            <CodeInput changeCode={(smscode: string) => change("smscode", smscode)} phone={loginInfo.phone}></CodeInput>
+            <CodeInput type="login" changeCode={(smscode: string) => change("smscode", smscode)} phone={loginInfo.phone}></CodeInput>
         </div>
     );
 };
