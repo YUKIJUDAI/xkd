@@ -14,7 +14,6 @@ interface MenuType {
 }
 
 export default class Home extends Component {
-
     menulist: MenuType[] = [
         {
             src: require("../../static/img/menu1.png"),
@@ -208,7 +207,7 @@ export default class Home extends Component {
                 {/* ScrollBack */}
                 <ScrollBack></ScrollBack>
                 {/* footer */}
-                <Footer></Footer>
+                <Footer selectedTab={0}></Footer>
             </div>
         );
     }

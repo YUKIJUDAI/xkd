@@ -19,8 +19,12 @@ interface State {
         smscode?: string;
     };
 }
+const mapStateToProps = (state: AppState) => ({
+    token: state.token,
+});
 
-class Login extends Component<State, any, {}> {
+@(connect(mapStateToProps, { setToken }) as any)
+export default class Login extends Component<any, State, {}> {
     constructor(props: any) {
         super(props);
         this.state = {
@@ -34,7 +38,7 @@ class Login extends Component<State, any, {}> {
     }
 
     // 修改登录方式
-    changeLoginWay = (loginWay: number) => {
+    changeLoginWay = (loginWay: 0 | 1) => {
         this.setState({ loginWay });
     };
 
@@ -45,7 +49,7 @@ class Login extends Component<State, any, {}> {
 
     // 短信登录
     loginBySms = async () => {
-        const res: any = http.post("User/Login/sms", { phone: this.state.phone, smscode: this.state.smscode });
+        const res: any = http.post("User/Login/sms", { phone: this.state.loginInfo.phone, smscode: this.state.loginInfo.smscode });
         if (res.code === 200) {
             Toast.success(res.msg);
             createHashHistory().push("/");
@@ -56,7 +60,7 @@ class Login extends Component<State, any, {}> {
 
     // 密码登录
     loginPwd = async () => {
-        const res: any = http.post("User/Login/pwd", { phone: this.state.phone, password: this.state.password });
+        const res: any = http.post("User/Login/pwd", { phone: this.state.loginInfo.phone, password: this.state.loginInfo.password });
         if (res.code === 200) {
             Toast.success(res.msg);
             createHashHistory().push("/");
@@ -67,7 +71,7 @@ class Login extends Component<State, any, {}> {
 
     // 修改登录信息
     changeLoginInfo = (loginInfo: State) => {
-        this.setState({ loginInfo: Object.assign(this.state.login, loginInfo) });
+        this.setState({ loginInfo: Object.assign(this.state.loginInfo, loginInfo) });
     };
 
     render() {
@@ -107,9 +111,3 @@ class Login extends Component<State, any, {}> {
         );
     }
 }
-
-const mapStateToProps = (state: AppState) => ({
-    token: state.token,
-});
-
-export default connect(mapStateToProps, { setToken })(Login);
