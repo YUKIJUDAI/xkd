@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import { Carousel } from "antd-mobile";
 
 import Footer from "../layout/footer";
-
 import ScrollBack from "../common/scrollBack";
 import Leaderboard from "../common/leaderboard";
 
@@ -40,33 +39,35 @@ export default class Home extends Component {
     render() {
         return (
             <div className="home">
-                {/* head  */}
-                <div className="home-head">
-                    <div className="home-head-message">
-                        <img src={require("../../static/img/message.png")} alt="" />
-                        <p></p>
+                <div className="home-fixed-top">
+                    {/* head  */}
+                    <div className="home-head">
+                        <div className="home-head-message">
+                            <img src={require("../../static/img/message.png")} alt="" />
+                            <p></p>
+                        </div>
+                        <div className="home-head-search">
+                            <img src={require("../../static/img/search.png")} alt="" />
+                            <input type="text" placeholder="活出漂亮人生" disabled />
+                        </div>
+                        <div className="home-head-feedback">
+                            <img src={require("../../static/img/feedback.png")} alt="" />
+                        </div>
+                        <div className="home-head-study">
+                            <img src={require("../../static/img/study.png")} alt="" />
+                        </div>
                     </div>
-                    <div className="home-head-search">
-                        <img src={require("../../static/img/search.png")} alt="" />
-                        <input type="text" placeholder="活出漂亮人生" disabled />
-                    </div>
-                    <div className="home-head-feedback">
-                        <img src={require("../../static/img/feedback.png")} alt="" />
-                    </div>
-                    <div className="home-head-study">
-                        <img src={require("../../static/img/study.png")} alt="" />
-                    </div>
+                    {/* nav */}
+                    <nav>
+                        <p className="home-nav">推荐</p>
+                        <p>全部</p>
+                        <p>情感</p>
+                        <p>心理</p>
+                        <p>性格</p>
+                        <p>游戏</p>
+                        <p>工具</p>
+                    </nav>
                 </div>
-                {/* nav */}
-                <nav>
-                    <p className="home-nav">推荐</p>
-                    <p>全部</p>
-                    <p>情感</p>
-                    <p>心理</p>
-                    <p>性格</p>
-                    <p>游戏</p>
-                    <p>工具</p>
-                </nav>
                 {/* swiper */}
                 <div className="home-swiper">
                     <Carousel infinite dots={false}>

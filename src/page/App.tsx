@@ -6,13 +6,15 @@ import configureStore from "../store/index";
 
 // main
 import Home from "./home/home";
+import College from "./college/college";
+import Detail from "./college/detail";
 
 // login
 import Login from "../page/login/login";
 import Registered from "../page/login/registered";
 import Forget from "../page/login/forget";
 
-const store = configureStore(); 
+const store = configureStore();
 
 export default class App extends Component {
     render() {
@@ -20,9 +22,12 @@ export default class App extends Component {
             <Provider store={store}>
                 <HashRouter>
                     <Route path="/" exact component={Home}></Route>
+                    <Route path="/college" exact component={College}></Route>
+                    <Route path="/college/detail/:id" component={Detail}></Route>
+
                     <Route path="/login" component={Login}></Route>
                     <Route path="/registered" component={Registered}></Route>
-                    <Route path="/forget" component={Forget}></Route>
+                    <Route path="/forget" component={Forget}></Route>                   
                 </HashRouter>
             </Provider>
         );
