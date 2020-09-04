@@ -52,6 +52,7 @@ export default class Login extends Component<any, State, {}> {
         const res: any = http.post("User/Login/sms", { phone: this.state.loginInfo.phone, smscode: this.state.loginInfo.smscode });
         if (res.code === 200) {
             Toast.success(res.msg);
+            setToken(res.result);
             createHashHistory().push("/");
         } else {
             Toast.fail(res.msg);
@@ -63,6 +64,7 @@ export default class Login extends Component<any, State, {}> {
         const res: any = http.post("User/Login/pwd", { phone: this.state.loginInfo.phone, password: this.state.loginInfo.password });
         if (res.code === 200) {
             Toast.success(res.msg);
+            setToken(res.result);
             createHashHistory().push("/");
         } else {
             Toast.fail(res.msg);
@@ -70,7 +72,7 @@ export default class Login extends Component<any, State, {}> {
     };
 
     // 修改登录信息
-    changeLoginInfo = (loginInfo: State) => {
+    changeLoginInfo(loginInfo: State) {
         this.setState({ loginInfo: Object.assign(this.state.loginInfo, loginInfo) });
     };
 

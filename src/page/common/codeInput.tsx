@@ -81,7 +81,7 @@ export default class codeInput extends Component<Props, State, {}> {
             Toast.fail("手机号码格式不正确");
             return;
         }
-        const res: any = await http.post("Other/captcha", { phone: this.props.phone, type: "reg", t: new Date().getTime() });
+        const res: any = await http.post("Other/captcha", { phone: this.props.phone, type: this.props.type, t: new Date().getTime() });
         typeof res === "string" ? this.setState({ show: true, codeImg: res }) : Toast.fail(res.msg);
     };
 

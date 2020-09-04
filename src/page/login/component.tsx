@@ -18,8 +18,13 @@ export const LoginBypassword: React.SFC<Props> = (props: Props) => {
 
     // 修改登录信息
     const change = (type: string, e: ChangeEvent<HTMLInputElement>) => {
-        if (type === "phone") setLoginInfo({ phone: e.target.value, password: loginInfo.password });
-        if (type === "password") setLoginInfo({ phone: loginInfo.phone, password: e.target.value });
+        let data: LoginInfo | null = null;
+        if (type === "phone") {
+            data = { phone: e.target.value, password: loginInfo.password };
+        } else if (type === "password") {
+            data = { phone: loginInfo.phone, password: e.target.value };
+        }
+        data && (setLoginInfo(data), props.changeLoginInfo(data));
     };
 
     return (
@@ -41,8 +46,13 @@ export const LoginByCode: React.SFC<Props> = (props: Props) => {
 
     // 修改登录信息
     const change = (type: string, e?: ChangeEvent<HTMLInputElement> | string) => {
-        if (type === "phone") setLoginInfo({ phone: (e as ChangeEvent<HTMLInputElement>).target.value, smscode: loginInfo.smscode });
-        if (type === "smscode") setLoginInfo({ phone: loginInfo.phone, smscode: e as string });
+        let data: LoginInfo | null = null;
+        if (type === "phone") {
+            data = { phone: (e as ChangeEvent<HTMLInputElement>).target.value, smscode: loginInfo.smscode };
+        } else if (type === "smscode") {
+            data = { phone: loginInfo.phone, smscode: e as string };
+        }
+        data && (setLoginInfo(data), props.changeLoginInfo(data));
     };
 
     return (

@@ -8,6 +8,8 @@ import configureStore from "../store/index";
 import Home from "./home/home";
 import College from "./college/college";
 import Detail from "./college/detail";
+// message
+import Message from "./message/message";
 
 // login
 import Login from "../page/login/login";
@@ -24,6 +26,8 @@ export default class App extends Component {
                     <Route path="/" exact component={Home}></Route>
                     <Route path="/college" exact component={College}></Route>
                     <Route path="/college/detail/:id" component={Detail}></Route>
+
+                    <Route path="/message" component={Message}></Route>
 
                     <Route path="/login" component={Login}></Route>
                     <Route path="/registered" component={Registered}></Route>
