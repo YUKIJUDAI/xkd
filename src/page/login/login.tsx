@@ -49,9 +49,10 @@ export default class Login extends Component<any, State, {}> {
 
     // 短信登录
     loginBySms = async () => {
-        const res: any = http.post("User/Login/sms", { phone: this.state.loginInfo.phone, smscode: this.state.loginInfo.smscode });
+        const res: any = await http.post("User/Login/sms", { phone: this.state.loginInfo.phone, smscode: this.state.loginInfo.smscode });
         if (res.code === 200) {
             Toast.success(res.msg);
+            console.log(1,res.result)
             setToken(res.result);
             createHashHistory().push("/");
         } else {
@@ -61,7 +62,7 @@ export default class Login extends Component<any, State, {}> {
 
     // 密码登录
     loginPwd = async () => {
-        const res: any = http.post("User/Login/pwd", { phone: this.state.loginInfo.phone, password: this.state.loginInfo.password });
+        const res: any = await http.post("User/Login/pwd", { phone: this.state.loginInfo.phone, password: this.state.loginInfo.password });
         if (res.code === 200) {
             Toast.success(res.msg);
             setToken(res.result);

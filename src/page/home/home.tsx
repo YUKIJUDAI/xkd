@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import { Carousel } from "antd-mobile";
 
+import http from "../../utils/http";
+
 import Footer from "../layout/footer";
 import ScrollBack from "../common/scrollBack";
 import Leaderboard from "../common/leaderboard";
@@ -12,7 +14,25 @@ interface MenuType {
     title: string;
 }
 
-export default class Home extends Component {
+interface State {
+    unRead: boolean; // 未读消息
+    tagList: any[]; // tag列表
+    indexNav: number; // 选中的列表
+    announcementList:any[]; // 公告列表
+}
+
+export default class Home extends Component<any, State, {}> {
+    constructor(props: any) {
+        super(props);
+
+        this.state = {
+            unRead: false,
+            tagList: [],
+            indexNav: -1,
+            announcementList:[]
+        };
+    }
+
     menulist: MenuType[] = [
         {
             src: require("../../static/img/menu1.png"),
@@ -36,6 +56,23 @@ export default class Home extends Component {
         },
     ];
 
+    componentWillMount() {
+        this.getUnread();
+        this.getTagList();
+    }
+
+    // 获取未读消息
+    async getUnread() {
+        const res: any = await http.post("Message/unread");
+        if (res.code === 200) this.setState({ unRead: Boolean(res.result) });
+    }
+
+    // 获取tag列表
+    async getTagList() {
+        const res: any = await http.post("Tag/index");
+        if (res.code === 200) this.setState({ tagList: res.result });
+    }
+
     render() {
         return (
             <div className="home">
@@ -44,7 +81,7 @@ export default class Home extends Component {
                     <div className="home-head">
                         <div className="home-head-message">
                             <img src={require("../../static/img/message.png")} alt="" />
-                            <p></p>
+                            {this.state.unRead && <p></p>}
                         </div>
                         <div className="home-head-search">
                             <img src={require("../../static/img/search.png")} alt="" />
@@ -58,14 +95,14 @@ export default class Home extends Component {
                         </div>
                     </div>
                     {/* nav */}
-                    <nav>
-                        <p className="home-nav">推荐</p>
-                        <p>全部</p>
-                        <p>情感</p>
-                        <p>心理</p>
-                        <p>性格</p>
-                        <p>游戏</p>
-                        <p>工具</p>
+                    <nav className="clearfix">
+                        <Carousel dots={false} slideWidth={0.05}>
+                            <p className={-1 === this.state.indexNav ? "active" : ""}>推荐</p>
+                            <p className={-2 === this.state.indexNav ? "active" : ""}>全部</p>
+                            {this.state.tagList.map((item: { id: number; name: string }, i) => {
+                                return <p className={i === this.state.indexNav ? "active" : ""} key={i}>{item.name}</p>;
+                            })}
+                        </Carousel>
                     </nav>
                 </div>
                 {/* swiper */}

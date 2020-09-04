@@ -63,14 +63,19 @@
     }
     // nav
     nav {
-        display: flex;
-        justify-content: space-between;
+        width: 1000px;
         color: #666;
         margin: 0.32rem 0.42rem;
         height: 0.6rem;
         line-height: 0.6rem;
         font-size: 0.28rem;
-        .home-nav {
+        overflow-x: scroll;
+        white-space: nowrap;
+        p {
+            // float: left;
+            // margin-right: 0.34rem;
+        }
+        .active {
             position: relative;
             font-size: 0.34rem;
             color: #333;

@@ -2,6 +2,7 @@ import axios from "axios";
 import qs from "qs";
 
 import { baseURL } from "../config/index";
+import store from "../store/index";
 
 // 创建新http
 const http = axios.create({
@@ -9,6 +10,7 @@ const http = axios.create({
     timeout: 10000,
     headers: {
         "Content-Type": "application/x-www-form-urlencoded;charset=utf-8",
+        token: store.getState().token.token || "",
     },
 });
 
